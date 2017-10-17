@@ -13,10 +13,6 @@
 #include "TcpServerMsgHandler.h"
 #include "ConnectionManager.h"
 
-#ifdef WIN32
-#include "vld.h"
-#endif
-
 class MyTcpServer : public TcpServer {
 public:
 	MessageHandler *createMsgHandler() {
@@ -26,13 +22,6 @@ public:
 
 
 int main(int argc, char *argv[]) {
-	
-#ifdef WIN32
-	WSADATA wsa_data;
-	WSAStartup(0x0201, &wsa_data);
-	
-#endif
-
 	HttpContainer *container = new PersistHttpContainer();
 	container->addServer(new MyTcpServer());
 	container->addServer(new HttpServer());
@@ -49,9 +38,5 @@ int main(int argc, char *argv[]) {
 
 	ConnectionManager *cfg = ConnectionManager::getInstance();
 	delete cfg;
-
-#ifdef WIN32	
-	WSACleanup();
-#endif
 }
 
