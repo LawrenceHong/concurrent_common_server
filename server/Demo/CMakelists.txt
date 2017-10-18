@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 2.6)
+
+project (demo)
+
+include_directories(${CMAKE_CURRENT_LIST_DIR}/../../libeventInterface/include)
+link_directories(${CMAKE_CURRENT_LIST_DIR}/../../libeventInterface/build)
+
+#set(SRC_LIST ${DIR_SRCS} ${DIR_INCLUDES})
+
+add_executable(demo libevent_test.cpp ${SRC_LIST})
+target_link_libraries(demo event eventInterface)

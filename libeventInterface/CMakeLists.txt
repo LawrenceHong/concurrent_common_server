@@ -9,13 +9,12 @@ message(STATUS "source dir: " ${PROJECT_SOURCE_DIR})
 set(CMAKE_BUILD_TYPE Debug)
 
 set(CMAKE_C_FLAGS_DEBUG "$ENV{CFLAGS} -O0 -g -ggdb -Wall")
-#set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -g -ggdb -Wall")
 set(CMAKE_C_FLAGS_RELEASE "$ENV{CFLAGS} -O3 -Wall")
 
-INCLUDE_DIRECTORIES(./)
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/src DIR_SRCS)
 
-set(SRC_LIST HttpContainer.cpp HttpRequest.cpp HttpServer.cpp HttpServerMsgHandler.cpp MessageHandler.cpp TcpClientThread.cpp TcpServer.cpp TcpServerMsgHandler.cpp Threadable.cpp TimeoutServer.cpp AbstractServer.cpp ConnectionManager.cpp Configure.cpp LibeventLog.cpp InputHandler.cpp)
-
+set(SRC_LIST ${DIR_SRCS})
 add_library(eventInterface SHARED ${SRC_LIST})
 
 #ADD_EXECUTABLE(libevent_test libevent_test.cpp  ${SRC_LIST})
